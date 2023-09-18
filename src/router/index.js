@@ -1,9 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const isLoggedIn = () => {
-  return sessionStorage.getItem('accessToken')
-}
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
