@@ -13,10 +13,6 @@ fetch('http://localhost:3000/login/secret', {
   .then((data) => {
     setSessionToken(data)
   })
-  .catch((error) => {
-    console.log(error)
-    // window.location.replace('/login')
-  })
 </script>
 
 <template>

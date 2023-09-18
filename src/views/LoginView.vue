@@ -1,48 +1,47 @@
 <script lang="js" setup>
 import { setSessionToken } from '../auth'
-onsubmit = (e) => {
-  e.preventDefault()
-  fetch('http://localhost:3000/login', {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      username: `${document.getElementById('username').value}`,
-      password: `${document.getElementById('password').value}`
-    })
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      setSessionToken(data)
-      window.location.replace('/')
-    })
-    .catch((e) => {
-      console.log(e)
-      document.getElementById('username').style.borderColor = 'red'
-      document.getElementById('password').style.borderColor = 'red'
-    })
-}
 </script>
 
 <template>
   <div class="container mobile tablet laptop desktop">
     <img src="../assets/logo.svg" id="image" />
-    <form id="login">
-      <input type="text" id="username" placeholder="Username" value="admin" required />
-      <input
-        type="password"
-        id="password"
-        placeholder="Password"
-        value="superSecretPassword"
-        required
-      />
+    <form id="login-form" @submit.prevent="login">
+      <input v-model="username" placeholder="Username" />
+      <input v-model="password" type="password" placeholder="Password" />
       <button type="submit">Sign in</button>
     </form>
     <p class="row-register">You don't have an account yet? <a href="/register">Sign on</a></p>
   </div>
 </template>
+
+<script lang="js">
+export default {
+  data: () => {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    async login() {
+      const res = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: this.username,
+          password: this.password
+        })
+      })
+      const data = await res.json()
+      setSessionToken(data)
+      this.$router.push('/')
+    }
+  }
+}
+</script>
 
 <style scoped>
 .container {
