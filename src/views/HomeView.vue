@@ -1,11 +1,15 @@
 <script setup>
 import { useItemStore } from '../stores/items'
-import { useIncomeStore } from '../stores/income'
+import { useMoneyStore } from '../stores/money'
 
 const itemStore = useItemStore()
-const incomeStore = useIncomeStore()
-itemStore.fetchItems().then(() => console.log(itemStore.getItems))
-incomeStore.fetchIncome().then(() => console.log(incomeStore.getIncome))
+const moneyStore = useMoneyStore()
+
+itemStore.fetchItems()
+moneyStore.fetchExpenses()
+moneyStore.fetchFixedExpenses()
+moneyStore.fetchBalances()
+moneyStore.fetchIncome()
 </script>
 
 <template>
