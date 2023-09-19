@@ -47,7 +47,7 @@ export default {
 .container {
   background-color: #3f4a50;
   border-radius: 20px;
-  display: inline-grid;
+  display: grid;
   grid-template-rows: 2fr 1fr 0fr;
   row-gap: 1rem;
   padding: 1rem 1.5rem;
